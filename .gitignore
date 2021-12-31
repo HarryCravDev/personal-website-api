@@ -6,6 +6,7 @@
 /out-tsc
 build
 config/dev.json
+/src/data/
 # Only exists if Bazel was run
 /bazel-out
 
