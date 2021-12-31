@@ -25,11 +25,10 @@ export const sendEmail = (email: string, subject: string, message: string) => {
 	transporter.sendMail(mailOptions, function (err: any, data: any) {
 		if (err) {
 			console.log("Error " + err);
+			return { success: false, message: err };
 		} else {
 			console.log({ data });
-			console.log("Email sent successfully");
+			return { success: true, message: "Email sent successfully." };
 		}
 	});
-
-	return { success: true, message: "Email sent." };
 };
