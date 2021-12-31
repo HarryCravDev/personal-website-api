@@ -1,5 +1,6 @@
 import { sendEmail } from "../utils/email/email";
 import { Subscribe } from "../entity/subscribe.entity";
+import { Validation } from "../utils/validation/Validation";
 import { v4 as uuidv4 } from "uuid";
 
 export class WebpageService {
@@ -8,6 +9,15 @@ export class WebpageService {
 	): Promise<{ success: boolean; message: string }> {
 		if (!email) {
 			return { success: false, message: "Message successfully sent." };
+		}
+
+		const validation = await new Validation().validateEmailExists(
+			email,
+			Subscribe
+		);
+
+		if (!validation.success) {
+			return { success: false, message: "Email already subscribed." };
 		}
 
 		try {
