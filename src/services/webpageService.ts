@@ -8,7 +8,7 @@ export class WebpageService {
 		email: string
 	): Promise<{ success: boolean; message: string }> {
 		if (!email) {
-			return { success: false, message: "Message successfully sent." };
+			return { success: false, message: "No email found." };
 		}
 
 		const validation = await new Validation().validateEmailExists(
@@ -23,7 +23,7 @@ export class WebpageService {
 		try {
 			const res = await Subscribe.create({ _id: uuidv4(), email });
 			sendEmail(email, "Subscription created!", "Thank you!");
-			return { success: true, message: "Message successfully sent." };
+			return { success: true, message: "Subscription successfully sent." };
 		} catch (error) {
 			return { success: false, message: error as string };
 		}

@@ -13,9 +13,8 @@ const run = async () => {
 	const app = express();
 
 	try {
-		console.log("DB connection string: ", config.get("db.connection"));
-
-		const conn = await mongoose.connect(config.get("db.connection"));
+		console.log("Harryyyy : ", config.get("db.connectionDocker"));
+		const conn = await mongoose.connect(config.get("db.connectionDocker"));
 
 		app.use(cors());
 
