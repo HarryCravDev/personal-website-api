@@ -14,7 +14,7 @@ const run = async () => {
 
 	try {
 		console.log("Harryyyy : ", config.get("db.connectionDocker"));
-		const conn = await mongoose.connect(config.get("db.connectionDocker"));
+		// const conn = await mongoose.connect(config.get("db.connectionDocker"));
 
 		app.use(cors());
 
