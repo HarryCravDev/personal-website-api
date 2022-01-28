@@ -1,4 +1,4 @@
-// import { sendEmail } from "../utils/email/email";
+import { sendEmail } from "../utils/email/email";
 import { Subscribe } from "../entity/subscribe.entity";
 import { Validation } from "../utils/validation/Validation";
 import { v4 as uuidv4 } from "uuid";
@@ -21,8 +21,8 @@ export class WebpageService {
 		}
 
 		try {
-			const res = await Subscribe.create({ _id: uuidv4(), email });
-			// sendEmail(email, "Subscription created!", "Thank you!");
+			// const res = await Subscribe.create({ _id: uuidv4(), email });
+			sendEmail(email, "Subscription created!", "Thank you!");
 			return { success: true, message: "Subscription successfully sent." };
 		} catch (error) {
 			return { success: false, message: error as string };

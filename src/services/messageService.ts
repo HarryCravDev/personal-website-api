@@ -1,5 +1,5 @@
 // import { MessageDto } from "src/dtos/message.dto";
-// import { sendEmail } from "../utils/email/email";
+import { sendEmail } from "../utils/email/email";
 import { v4 as uuidv4 } from "uuid";
 import { Message } from "../entity/message.entity";
 
@@ -17,14 +17,15 @@ export class MessageService {
 		messageObj._id = uuidv4();
 
 		try {
-			const res = await Message.create(messageObj);
+			// const res = await Message.create(messageObj);
 
-			// sendEmail(messageObj.email, messageObj.subject, messageObj.message);
+			sendEmail(messageObj.email, messageObj.subject, messageObj.message);
 
 			return {
 				success: true,
 				message: "Message successfully sent.",
-				data: res,
+				data: {},
+				// data: res,
 			};
 		} catch (error) {
 			return { success: false, message: error as string };

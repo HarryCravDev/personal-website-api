@@ -1,34 +1,37 @@
-// import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 // import config from "config";
+require("dotenv").config();
 
-// export const sendEmail = (email: string, subject: string, message: string) => {
-// 	// Run nodemailed
-// 	let transporter = nodemailer.createTransport({
-// 		service: "gmail",
-// 		auth: {
-// 			type: "OAuth2",
-// 			user: config.get("nodemailer.auth.email") as string,
-// 			accessToken: "",
-// 			clientId: config.get("nodemailer.auth.clientId") as string,
-// 			clientSecret: config.get("nodemailer.auth.clientSecret") as string,
-// 			refreshToken: config.get("nodemailer.auth.refreshToken") as string,
-// 		},
-// 	});
+console.log("Data: ", process.env.CLIENTID);
 
-// 	let mailOptions = {
-// 		from: config.get("nodemailer.auth.email") as string,
-// 		to: email,
-// 		subject: subject,
-// 		text: message,
-// 	};
+export const sendEmail = (email: string, subject: string, message: string) => {
+	// Run nodemailed
+	let transporter = nodemailer.createTransport({
+		service: "gmail",
+		auth: {
+			type: "OAuth2",
+			user: process.env.EMAIL as string,
+			accessToken: "",
+			clientId: process.env.CLIENTID as string,
+			clientSecret: process.env.CLIENTSECRET as string,
+			refreshToken: process.env.REFRESHTOKEN as string,
+		},
+	});
 
-// 	transporter.sendMail(mailOptions, function (err: any, data: any) {
-// 		if (err) {
-// 			console.log("Error " + err);
-// 			return { success: false, message: err };
-// 		} else {
-// 			console.log({ data });
-// 			return { success: true, message: "Email sent successfully." };
-// 		}
-// 	});
-// };
+	let mailOptions = {
+		from: process.env.EMAIL as string,
+		to: email,
+		subject: subject,
+		text: message,
+	};
+
+	transporter.sendMail(mailOptions, function (err: any, data: any) {
+		if (err) {
+			console.log("Error " + err);
+			return { success: false, message: err };
+		} else {
+			console.log({ data });
+			return { success: true, message: "Email sent successfully." };
+		}
+	});
+};

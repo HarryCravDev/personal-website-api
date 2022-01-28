@@ -8,13 +8,13 @@ import helmet from "helmet";
 import compression from "compression";
 // import config from "config";
 import mongoose from "mongoose";
+require("dotenv").config();
 
 const run = async () => {
 	const app = express();
 
 	try {
-		// console.log("Harryyyy : ", config.get("db.connectionDocker"));
-		// const conn = await mongoose.connect(config.get("db.connectionDocker"));
+		// const conn = await mongoose.connect(process.env.CONNECTION as string);
 
 		app.use(cors());
 
@@ -44,7 +44,7 @@ const run = async () => {
 	app.use(errorHandler);
 
 	// const port = config.get("app.port") || 3000;
-	const port = process.env.PORT || 3000;
+	const port = process.env.PORT || 1995;
 
 	app.listen(port, () =>
 		console.log(`Example app listening at http://localhost:${port} 🥳`)
