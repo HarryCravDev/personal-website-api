@@ -6,14 +6,14 @@ import { errorHandler } from "./utils/errorHandling/errorHandler.util";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
-import config from "config";
+// import config from "config";
 import mongoose from "mongoose";
 
 const run = async () => {
 	const app = express();
 
 	try {
-		console.log("Harryyyy : ", config.get("db.connectionDocker"));
+		// console.log("Harryyyy : ", config.get("db.connectionDocker"));
 		// const conn = await mongoose.connect(config.get("db.connectionDocker"));
 
 		app.use(cors());
@@ -43,7 +43,8 @@ const run = async () => {
 
 	app.use(errorHandler);
 
-	const port = config.get("app.port") || 3000;
+	// const port = config.get("app.port") || 3000;
+	const port = 3000;
 
 	app.listen(port, () =>
 		console.log(`Example app listening at http://localhost:${port} 🥳`)

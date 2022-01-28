@@ -1,6 +1,6 @@
 import { Request } from "express";
 import jwt = require("jsonwebtoken");
-import config from "config";
+// import config from "config";
 
 export class AuthenticationError extends Error {
 	constructor(message: string) {
@@ -38,7 +38,8 @@ export function expressAuthentication(
 
 		jwt.verify(
 			token.split("Bearer ")[1],
-			config.get("app.secret"),
+			process.env.SECRET as string,
+			// config.get("app.secret"),
 			function (err: any, decoded: any) {
 				if (err) {
 					reject(err);
