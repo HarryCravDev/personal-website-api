@@ -44,7 +44,7 @@ const run = async () => {
 	app.use(errorHandler);
 
 	// const port = config.get("app.port") || 3000;
-	const port = 3000;
+	const port = process.env.PORT || 3000;
 
 	app.listen(port, () =>
 		console.log(`Example app listening at http://localhost:${port} 🥳`)
