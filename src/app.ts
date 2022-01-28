@@ -31,6 +31,10 @@ const run = async () => {
 
 		app.use(bodyParser.json());
 
+		app.get("/", (req: express.Request, res: express.Response) => {
+			return res.status(200).json({ success: true, message: "this test works" });
+		});
+
 		RegisterRoutes(app);
 	} catch (error) {
 		console.log("Process exited with error: ", error);
