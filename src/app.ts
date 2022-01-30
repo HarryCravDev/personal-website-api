@@ -7,6 +7,7 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 // import config from "config";
+import {Message} from './entity/message.entity';
 import path from 'path';
 import mongoose from "mongoose";
 require("dotenv").config();
@@ -15,7 +16,7 @@ const run = async () => {
 	const app = express();
 
 	try {
-		// const conn = await mongoose.connect(process.env.CONNECTION as string);
+		const conn = await mongoose.connect(process.env.CONNECTION as string);
 
 		app.use(cors());
 
@@ -50,6 +51,11 @@ const run = async () => {
 				}
 			});
 		});
+
+		app.get('/test', async (req: express.Request, res: express.Response) => {
+			const data = await Message.find({});
+			return res.json({ success: true, message: "Test endpoint here...", data });
+		})
 
 		RegisterRoutes(app);
 	} catch (error) {
