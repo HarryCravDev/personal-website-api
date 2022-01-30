@@ -16,7 +16,9 @@ const run = async () => {
 	const app = express();
 
 	try {
+		console.log("Before connection string !!!", process.env.CONNECTION as string);
 		const conn = await mongoose.connect(process.env.CONNECTION as string);
+		console.log("After connection string !!!");
 
 		app.use(cors());
 
@@ -53,7 +55,13 @@ const run = async () => {
 		});
 
 		app.get('/test', async (req: express.Request, res: express.Response) => {
-			const data = await Message.find({});
+			let data;
+			try {
+				data = await Message.find({});
+				
+			} catch (error) {
+				data = error;
+			}
 			return res.json({ success: true, message: "Test endpoint here...", data });
 		})
 
