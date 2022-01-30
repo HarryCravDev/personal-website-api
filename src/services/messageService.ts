@@ -23,9 +23,8 @@ export class MessageService {
 
 			return {
 				success: true,
-				message: "Message successfully sent.",
+				message: "Message successfully sent. TEST.",
 				data: res,
-				test: " test "
 			};
 		} catch (error) {
 			return { success: false, message: error as string };
