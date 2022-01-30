@@ -17,15 +17,14 @@ export class MessageService {
 		messageObj._id = uuidv4();
 
 		try {
-			// const res = await Message.create(messageObj);
+			const res = await Message.create(messageObj);
 
 			sendEmail(messageObj.email, messageObj.subject, messageObj.message);
 
 			return {
 				success: true,
 				message: "Message successfully sent.",
-				data: {},
-				// data: res,
+				data: res,
 			};
 		} catch (error) {
 			return { success: false, message: error as string };
