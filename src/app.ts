@@ -8,6 +8,7 @@ import helmet from "helmet";
 import compression from "compression";
 // import config from "config";
 import {Message} from './entity/message.entity';
+import axios from 'axios';
 import path from 'path';
 import mongoose from "mongoose";
 require("dotenv").config();
@@ -34,36 +35,6 @@ const run = async () => {
 		);
 
 		app.use(bodyParser.json());
-
-		app.get("/", (req: express.Request, res: express.Response, next) => {
-			console.log("Sned file...");
-			// return res.status(200).json({ success: true, message: "this test works" });
-			// return res.sendFile("./files/cv.docx");
-
-			var options = {
-				root: path.join(__dirname + '/files/')
-			};
-			console.log({options});
-			var fileName = 'cv.docx';
-			res.sendFile(fileName, options, function (err) {
-				if (err) {
-					next(err);
-				} else {
-					console.log('Sent:', fileName);
-				}
-			});
-		});
-
-		app.get('/test', async (req: express.Request, res: express.Response) => {
-			let data;
-			try {
-				data = await Message.find({});
-				
-			} catch (error) {
-				data = error;
-			}
-			return res.json({ success: true, message: "Test endpoint here...", data });
-		})
 
 		RegisterRoutes(app);
 	} catch (error) {

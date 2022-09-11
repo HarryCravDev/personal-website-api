@@ -24,7 +24,8 @@ export class WebpageService {
 			const res = await Subscribe.create({ _id: uuidv4(), email });
 			sendEmail(email, "Subscription created!", "Thank you!");
 			return { success: true, message: "Subscription successfully sent." };
-		} catch (error) {
+		} catch (error: any) {
+			console.log("Error: ", error);
 			return { success: false, message: error as string };
 		}
 	}

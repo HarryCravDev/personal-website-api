@@ -6,28 +6,18 @@ import { Message } from "../entity/message.entity";
 export class MessageService {
 	async createMessage(
 		messageObj: any
-	): Promise<{ success: boolean; message: string; data?: any }> {
-		// public createMessage(messageObj: MessageDto): Promise<{ success: boolean; message: string; }> {
-
+	): Promise<void> {
 		if (!messageObj) {
-			return { success: false, message: "Message successfully sent." };
+			throw new Error("Message object is empty.");
+			// return { success: false, message: "Message successfully sent." };
 		}
 
 		// Apply id to record
 		messageObj._id = uuidv4();
 
-		try {
-			const res = await Message.create(messageObj);
+		const res = await Message.create(messageObj);
 
-			sendEmail(messageObj.email, messageObj.subject, messageObj.message);
-
-			return {
-				success: true,
-				message: "Message successfully sent. TEST.",
-				data: res,
-			};
-		} catch (error) {
-			return { success: false, message: error as string };
-		}
+		sendEmail(messageObj.email, messageObj.subject, messageObj.message);
 	}
+
 }

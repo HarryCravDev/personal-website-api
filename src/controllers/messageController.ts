@@ -11,8 +11,16 @@ export class MessageController extends Controller {
 		console.log("Message trigger");
 		this.setStatus(201); // set return status 201
 
-		const res = await new MessageService().createMessage(requestBody);
-
-		return res;
+		try {
+			await new MessageService().createMessage(requestBody);
+			
+			return { success: true, message: "Message sent." };
+			
+		} catch (error: any) {
+			this.setStatus(400);
+			// todo - write and capture all errors here (set correct status codes for all errors)
+			console.log("Error: ", error);
+			return { success: false, message: error.message as string };
+		}
 	}
 }
